@@ -28,11 +28,15 @@ public class Encode {
         Scanner reader = new Scanner(System.in);  // Reading from System.in
         int[] list = new int[1];
         System.out.println("Enter a number: ");
-        int num = reader.nextInt();// Scans the next token of the input as an int.
-        if (num > maxNumber || num < minNumber) {
-            throw new IllegalArgumentException("Number should be greater than 0 and smaller than " + maxNumber);
+        if (reader.hasNextInt()) {
+            int num = reader.nextInt();// Scans the next token of the input as an int.
+            if (num > maxNumber || num < minNumber) {
+                throw new IllegalArgumentException("Please input a positive integer that greater than 0 and smaller than " + maxNumber);
+            }
+            list[0] = num;
+        } else {
+            throw new NumberFormatException("Invalid input, should be a number");
         }
-        list[0] = num;
 
         return encode(list);
     }
@@ -54,7 +58,6 @@ public class Encode {
         }
 
         int numberHash = 0;
-
         for (int i = 0; i < batchNumber.length; i++) {
             numberHash += (batchNumber[i] % (i + 100));
         }
@@ -62,7 +65,6 @@ public class Encode {
         String alphabet = this.alphabet;
         String firstChar = this.firstChar;
         char ret = alphabet.charAt((int) (numberHash % alphabet.length()));
-        // char lottery = ret;
 
         int num;
         int sepsIndex, guardIndex;

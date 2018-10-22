@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0bb34258-9787-459f-978e-8c834f74d0a5" name="Default" comment="added some comments">
+    <list default="true" id="0bb34258-9787-459f-978e-8c834f74d0a5" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/uniqueID/com/company/Encode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/uniqueID/com/company/Encode.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Encode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Encode.java" afterDir="false" />
@@ -34,8 +34,8 @@
       <file leaf-file-name="Encode.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/company/Encode.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1650">
-              <caret line="110" column="50" selection-start-line="110" selection-start-column="50" selection-end-line="110" selection-end-column="50" />
+            <state relative-caret-position="173">
+              <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -71,7 +71,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="25" />
+    <option name="x" value="183" />
+    <option name="y" value="24" />
     <option name="width" value="1260" />
     <option name="height" value="702" />
   </component>
@@ -183,21 +184,35 @@
       <option name="project" value="LOCAL" />
       <updated>1540189767408</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="added some comments and changed some access level">
+      <created>1540191995944</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1540191995944</updated>
+    </task>
+    <task id="LOCAL-00004" summary="make sure the first letter is not a number or vowel &#10;and set the max digits of ID as 6">
+      <created>1540197997343</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1540197997343</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="25" width="1260" height="702" extended-state="0" />
+    <frame x="183" y="24" width="1260" height="702" extended-state="0" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info active="true" anchor="bottom" id="Messages" order="7" visible="true" weight="0.32961783" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.32961783" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="3" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32961783" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32961783" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
@@ -226,7 +241,9 @@
     <MESSAGE value="version1 basic hash function &amp; scanner" />
     <MESSAGE value="add ID max digits restriction" />
     <MESSAGE value="added some comments" />
-    <option name="LAST_COMMIT_MESSAGE" value="added some comments" />
+    <MESSAGE value="added some comments and changed some access level" />
+    <MESSAGE value="make sure the first letter is not a number or vowel &#10;and set the max digits of ID as 6" />
+    <option name="LAST_COMMIT_MESSAGE" value="make sure the first letter is not a number or vowel &#10;and set the max digits of ID as 6" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -356,19 +373,19 @@
     <entry file="file://$PROJECT_DIR$/.idea/description.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/out/production/uniqueID/com/company/Encode.class">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/out/production/uniqueID/com/company/Main.class">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/uniqueID.iml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/out/production/uniqueID/com/company/Encode.class">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/Encode.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1650">
-          <caret line="110" column="50" selection-start-line="110" selection-start-column="50" selection-end-line="110" selection-end-column="50" />
+        <state relative-caret-position="173">
+          <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
