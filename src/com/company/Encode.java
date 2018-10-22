@@ -12,11 +12,12 @@ import java.util.Scanner;
 
 public class Encode {
     private static final String alphabet = new String("ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890");
+    private static final String firstChar = new String("BCDFGHJKLMNPQRSTVWXYZ");
     private static int maxNumber = 2147483647;
     private static int minNumber = 1;
     private static final int GUARD_DIV = 12;
     private final int minHashLength = 4;
-    private final int maxHashLength = 5;
+    private final int maxHashLength = 6;
     private final int salt = 31;
     private String seps = "AEIOU";
     private int guardCount = (int) Math.ceil((double) alphabet.length() / GUARD_DIV);
@@ -59,6 +60,7 @@ public class Encode {
         }
 
         String alphabet = this.alphabet;
+        String firstChar = this.firstChar;
         char ret = alphabet.charAt((int) (numberHash % alphabet.length()));
         // char lottery = ret;
 
@@ -89,26 +91,35 @@ public class Encode {
             }
         }
 
+        if (firstChar.indexOf(ret_strB.charAt(0)) < 0) {
+            num = batchNumber[0];
+            buffer = ret + this.salt + firstChar;
+
+            firstChar = Encode.consistentShuffle(firstChar, buffer.substring(0, firstChar.length()));
+            String first = Encode.hash(num, firstChar);
+            ret_strB.replace(0,1,first);
+        }
+
         //convert the stringbuilder to string and make sure the generated ID is within size limitation.
         String ret_str = ret_strB.toString();
         if (ret_str.length() < this.minHashLength) {
             guardIndex = (numberHash + (int) (ret_str.charAt(0))) % this.guards.length();
             guard = this.guards.charAt(guardIndex);
 
-            ret_str = guard + ret_str;
+            ret_str = ret_str + guard;
 
             if (ret_str.length() < this.minHashLength) {
                 guardIndex = (numberHash + (int) (ret_str.charAt(2))) % this.guards.length();
                 guard = this.guards.charAt( guardIndex);
 
-                ret_str += guard;
+                ret_str = ret_str + guard;
             }
         }
 
-        int halfLen = alphabet.length() / 2;
+        int halfLen = firstChar.length() / 2;
         while (ret_str.length() < this.minHashLength) {
-            alphabet = Encode.consistentShuffle(alphabet, alphabet);
-            ret_str = alphabet.substring(halfLen) + ret_str + alphabet.substring(0, halfLen);
+            firstChar = Encode.consistentShuffle(firstChar, firstChar);
+            ret_str = firstChar.substring(halfLen) + ret_str + firstChar.substring(0, halfLen);
             int excess = ret_str.length() - this.minHashLength;
             if (excess > 0) {
                 int start_pos = excess / 2;
@@ -118,7 +129,7 @@ public class Encode {
 
         if (ret_str.length() > this.maxHashLength) {
             int excess = ret_str.length() - this.maxHashLength;
-            ret_str = ret_str.substring(excess + 1);
+            ret_str = ret_str.substring(0,ret_str.length() - excess);
         }
 
         return ret_str;
