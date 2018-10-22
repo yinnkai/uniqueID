@@ -5,35 +5,40 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * code modified from hashids-java
+ * obtained from https://github.com/10cella/hashids-java/blob/v1.0.2/src/main/java/org/hashids/Hashids.java
+ */
+
 public class Encode {
     private static final String alphabet = new String("ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890");
-    public static int maxNumber = 2147483647;
-    public static int minNumber = 1;
+    private static int maxNumber = 2147483647;
+    private static int minNumber = 1;
     private static final int GUARD_DIV = 12;
     private final int minHashLength = 4;
     private final int maxHashLength = 5;
     private final int salt = 31;
     private String seps = "AEIOU";
-    int guardCount = (int) Math.ceil((double) alphabet.length() / GUARD_DIV);
+    private int guardCount = (int) Math.ceil((double) alphabet.length() / GUARD_DIV);
     private String guards = alphabet.substring(0, guardCount);
 
-
+    //get input from system
     public String scanner() {
         Scanner reader = new Scanner(System.in);  // Reading from System.in
         int[] list = new int[1];
         System.out.println("Enter a number: ");
-        int num = reader.nextInt();
+        int num = reader.nextInt();// Scans the next token of the input as an int.
         if (num > maxNumber || num < minNumber) {
             throw new IllegalArgumentException("Number should be greater than 0 and smaller than " + maxNumber);
         }
         list[0] = num;
-        // Scans the next token of the input as an int.
-        //once finished
+
         return encode(list);
     }
 
-
-    public String encode(int[] batchNumber) {
+    //encrypt the input number into an unique string
+    private String encode(int[] batchNumber) {
+        //check whether the input is null or invalid
         if (batchNumber.length == 0) {
             return "";
         }
@@ -52,15 +57,18 @@ public class Encode {
         for (int i = 0; i < batchNumber.length; i++) {
             numberHash += (batchNumber[i] % (i + 100));
         }
+
         String alphabet = this.alphabet;
         char ret = alphabet.charAt((int) (numberHash % alphabet.length()));
         // char lottery = ret;
+
         int num;
         int sepsIndex, guardIndex;
         String buffer;
         StringBuilder ret_strB = new StringBuilder(minHashLength);
         ret_strB.append(ret);
         char guard;
+
         for (int i = 0; i < batchNumber.length; i++) {
             num = batchNumber[i];
             buffer = ret + this.salt + alphabet;
@@ -81,6 +89,7 @@ public class Encode {
             }
         }
 
+        //convert the stringbuilder to string and make sure the generated ID is within size limitation.
         String ret_str = ret_strB.toString();
         if (ret_str.length() < this.minHashLength) {
             guardIndex = (numberHash + (int) (ret_str.charAt(0))) % this.guards.length();
@@ -115,6 +124,7 @@ public class Encode {
         return ret_str;
     }
 
+    //shuffle the given alphabet consistently to make the generated ID irregular and hard to be guessed.
     private static String consistentShuffle(String alphabet, String salt) {
         if (salt.length() <= 0) {
             return alphabet;
@@ -135,6 +145,7 @@ public class Encode {
         return new String(tmpArr);
     }
 
+    //create hash code that used to convert into the last character of a temp stringbuilder
     private static String hash(int input, String alphabet) {
         String hash = "";
         int alphabetLen = alphabet.length();
