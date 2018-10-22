@@ -10,7 +10,8 @@ public class Encode {
     public static int maxNumber = 2147483647;
     public static int minNumber = 1;
     private static final int GUARD_DIV = 12;
-    private final int minHashLength = 8;
+    private final int minHashLength = 4;
+    private final int maxHashLength = 5;
     private final int salt = 31;
     private String seps = "AEIOU";
     int guardCount = (int) Math.ceil((double) alphabet.length() / GUARD_DIV);
@@ -104,6 +105,11 @@ public class Encode {
                 int start_pos = excess / 2;
                 ret_str = ret_str.substring(start_pos, start_pos + this.minHashLength);
             }
+        }
+
+        if (ret_str.length() > this.maxHashLength) {
+            int excess = ret_str.length() - this.maxHashLength;
+            ret_str = ret_str.substring(excess + 1);
         }
 
         return ret_str;
