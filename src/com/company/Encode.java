@@ -24,7 +24,7 @@ public class Encode {
     public String scanner() {
         Scanner reader = new Scanner(System.in); //Reading from System.in
         int[] list = new int[1];
-        System.out.println("Enter a number: ");
+        System.out.println("Enter a positive integer: ");
         if (reader.hasNextInt()) {
             int num = reader.nextInt(); // Scans the next token of the input as an int.
             if (num > maxNumber || num < minNumber) {
@@ -32,7 +32,7 @@ public class Encode {
             }
             list[0] = num;
         } else {
-            throw new NumberFormatException("Invalid input, should be a number");
+            throw new NumberFormatException("Invalid input, should be a positive integer");
         }
         return encode(list);
     }
