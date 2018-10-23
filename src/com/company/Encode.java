@@ -5,10 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-/**
- * code modified from hashids-java
- * obtained from https://github.com/10cella/hashids-java/blob/v1.0.2/src/main/java/org/hashids/Hashids.java
- */
+/* author: Yinkai(Kate)*/
 
 public class Encode {
     private static final String alphabet = new String("ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890");
@@ -23,13 +20,13 @@ public class Encode {
     private int guardCount = (int) Math.ceil((double) alphabet.length() / GUARD_DIV);
     private String guards = alphabet.substring(0, guardCount);
 
-    //get input from system
+    /** Get inputs from systemin **/
     public String scanner() {
-        Scanner reader = new Scanner(System.in);  // Reading from System.in
+        Scanner reader = new Scanner(System.in); //Reading from System.in
         int[] list = new int[1];
         System.out.println("Enter a number: ");
         if (reader.hasNextInt()) {
-            int num = reader.nextInt();// Scans the next token of the input as an int.
+            int num = reader.nextInt(); // Scans the next token of the input as an int.
             if (num > maxNumber || num < minNumber) {
                 throw new IllegalArgumentException("Please input a positive integer that greater than 0 and smaller than " + maxNumber);
             }
@@ -37,14 +34,17 @@ public class Encode {
         } else {
             throw new NumberFormatException("Invalid input, should be a number");
         }
-
         return encode(list);
     }
 
-    //encrypt the input number into an unique string
-    private String encode(int[] batchNumber) {
-        //check whether the input is null or invalid
-        if (batchNumber.length == 0) {
+    /**
+     * Encrypt input number to string
+     *
+     * @param batchNumber to encrypt
+     * @return the encrypt string
+     */
+    public String encode(int[] batchNumber) {
+        if (batchNumber.length == 0) { // check whether the input is null or invalid
             return "";
         }
 
@@ -65,14 +65,12 @@ public class Encode {
         String alphabet = this.alphabet;
         String firstChar = this.firstChar;
         char ret = alphabet.charAt((int) (numberHash % alphabet.length()));
-
         int num;
         int sepsIndex, guardIndex;
         String buffer;
         StringBuilder ret_strB = new StringBuilder(minHashLength);
         ret_strB.append(ret);
         char guard;
-
         for (int i = 0; i < batchNumber.length; i++) {
             num = batchNumber[i];
             buffer = ret + this.salt + alphabet;
@@ -93,16 +91,16 @@ public class Encode {
             }
         }
 
+        /* recalculate the first letter of ID if it is vowel or number*/
         if (firstChar.indexOf(ret_strB.charAt(0)) < 0) {
             num = batchNumber[0];
             buffer = ret + this.salt + firstChar;
-
             firstChar = Encode.consistentShuffle(firstChar, buffer.substring(0, firstChar.length()));
             String first = Encode.hash(num, firstChar);
             ret_strB.replace(0,1,first);
         }
 
-        //convert the stringbuilder to string and make sure the generated ID is within size limitation.
+        /*convert the stringbuilder to string and make sure the generated ID is within size limitation.*/
         String ret_str = ret_strB.toString();
         if (ret_str.length() < this.minHashLength) {
             guardIndex = (numberHash + (int) (ret_str.charAt(0))) % this.guards.length();
@@ -137,7 +135,12 @@ public class Encode {
         return ret_str;
     }
 
-    //shuffle the given alphabet consistently to make the generated ID irregular and hard to be guessed.
+    /**
+     * shuffle the given alphabet consistently to make the generated ID irregular and hard to be guessed.
+     *
+     * @param alphabet, string of characters that shouldn't be arrange together
+     * @return shuffled string
+     */
     private static String consistentShuffle(String alphabet, String salt) {
         if (salt.length() <= 0) {
             return alphabet;
@@ -158,7 +161,12 @@ public class Encode {
         return new String(tmpArr);
     }
 
-    //create hash code that used to convert into the last character of a temp stringbuilder
+    /**
+     * create hash code that used to convert into the last character of a temp stringbuilder.
+     *
+     * @param input batchNumber, alphabet that used to pick characters from
+     * @return UniqueID string
+     */
     private static String hash(int input, String alphabet) {
         String hash = "";
         int alphabetLen = alphabet.length();
@@ -170,7 +178,6 @@ public class Encode {
             }
             input /= alphabetLen;
         } while (input > 0);
-
 
         return hash;
     }
